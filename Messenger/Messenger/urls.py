@@ -19,17 +19,19 @@ from django.contrib import admin
 from django.urls import path
 from . import settings
 
-from login.views import AuthorizationView, LogoutView
+from login.views import authorization, LogoutView
 from reg.views import RegistrationView
 from home.views import HomeView
+from my_publications.views import CreatePuplicationView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view(), name='home'),
     path('register/', RegistrationView.as_view(), name='reg'),
-    path('login/', AuthorizationView.as_view(), name='auth'),
+    path('login/', authorization, name='auth'),
     path('log-out/', LogoutView.as_view(), name='logout'),
+    path('create/', CreatePuplicationView.as_view(), name = 'create'),
 ]
 
 

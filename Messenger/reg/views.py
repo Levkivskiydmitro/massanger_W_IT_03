@@ -91,3 +91,4 @@ class RegistrationView(CreateView):
                     'form': RegistrationForm(),
                     'codeform': CodeForm(),
                     'page' :"reg"})
+                    

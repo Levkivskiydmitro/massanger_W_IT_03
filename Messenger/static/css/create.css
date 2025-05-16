@@ -1,0 +1,138 @@
+.window-back {
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    top: 0px;
+    left: 0px;
+
+    background-color: #000000e8;
+
+    width: 100%;
+    height: 100vh;
+
+    z-index: 1;
+}
+
+.window-back.show {
+    display: flex;
+}
+
+.window {
+    background-color: white;
+    color: #070A1C;
+
+    width: 773px;
+
+    border-radius: 20px;
+
+    padding: 44px;
+    padding-top: 24px;
+}
+
+.window-input {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.window-content {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+.window h3 {
+    font-size: 16px;
+}
+
+.window input, textarea {
+    background-color: white;
+    border: 1px solid #CDCED2;
+    padding: 10px 16px;
+
+    border-radius: 10px;
+    resize: none;
+}
+
+.window input {
+    width: 343px;
+    height: 42px;
+}
+
+.window textarea {
+    width: 100%;
+    height: 126px;
+}
+
+.window input:focus, textarea:focus {
+    outline-color: #81818D;
+}
+
+.window textarea::-webkit-scrollbar {
+    background-color: #E9E5EE;
+    width: 8px;
+}
+
+.window textarea::-webkit-scrollbar-thumb {
+    background-color: #543C52;
+    border-radius: 10px;
+}
+
+.bottom {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 100%;
+    height: 40px;
+}
+
+.outlined {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 100px;
+
+    width: 40px;
+    height: 40px;
+
+    padding: 10px;
+}
+
+.filled {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #543C52;
+    border: none;
+    color: white;
+    border-radius: 100px;
+    padding: 10px 16px;
+}
+
+.filled img {
+    width: 20px;
+    height: 20px;
+}
+
+#close-btn {
+    position: absolute;
+    top: 24px;
+    right: 44px;
+    background-color: transparent;
+
+    width: 40px;
+    height: 40px;
+
+    border: none;
+}
+
+#close-btn:hover {
+    background-color: gainsboro;
+}
+
+.imgs-container div {
+    border-radius: 16px;
+}

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'reg',
     'login',
     'home',
+    'my_publications',
 ]
 
 ASGI_APPLICATION = 'Messenger.asgi.application'
@@ -155,5 +156,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'register'

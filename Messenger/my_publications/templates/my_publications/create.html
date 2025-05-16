@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Публікації
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'home_app/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/create.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="window-back show">
+    <div class="window">
+        <button id="close-btn"><img src="{% static 'img/Vector.css' %}"></button>
+        <h1>Створення публікації</h1>
+        <div class="window-content">
+            <div class="window-input">
+                <h3>Назва публікації</h3>
+                <input type="text" placeholder="">
+            </div>
+            <div class="window-input">
+                <h3>Тема публікації</h3>
+                <input type="text" placeholder="Напишіть тему публікаціїї">
+            </div>
+            <div class="window-input">
+                <textarea name="">
+                Інколи найкращі ідеї народжуються в тиші
+Природа, книга і спокій — усе, що потрібно, аби перезавантажитись.
+#відпочинок #натхнення #життя #природа #читання #спокій #гармонія
+                </textarea>
+            </div>
+            <div class="window-input">
+                <h3>Посилання</h3>
+                <input type="text" placeholder="https://www.instagram.com/world.it.academy">
+            </div>
+        </div>
+        <div class="imgs-container">
+            <input type="file">
+            <div><button></button></div>
+            <div><button></button></div>
+            <div><button></button></div>
+        </div>
+        <div class="bottom">
+            <button class="outlined" id="img-btn"><img src="{% static 'img/Component3.png' %}" alt=""></button>
+            <button class="outlined" id="emoji-btn"><img src="{% static 'img/Component4.png' %}" alt=""></button>
+            <button class="filled">Публікація<img src="{% static 'img/telegram.png' %}"></button>
+        </div>
+    </div>
+</div>
+
+
+<div class="content">
+    <aside class="fixed-left-panel">
+        <div class="user-profile">
+            <div class="user-profile-main-info">
+                <img class="user-profile-photo" src="{% static 'home_app/img/UserPhoto.png' %}">
+                <div class="user-profile-username">
+                    {% if request.user.is_authenticated %}
+                        <p class="user-profile-name">{{ request.user.username }}</p>
+                    {% else %}
+                        <p class="user-profile-name">Lina Li</p>
+                    {% endif %}
+                    <p class="user-profile-called-as">@thelili</p>
+                </div>
+            </div>
+            <div class="user-profile-social-stats">
+                <div class="user-profile-social-stat-div" >
+                    <p class="user-profile-social-stat-publics-count user-profile-social-stat-count" id="user-profile-social-stat-publics-count">566</p>
+                    <p class="user-profile-social-stat-name">Дописи</p>
+                </div>
+                <div class="user-profile-social-stat-div" >
+                    <p class="user-profile-social-stat-followers-count user-profile-social-stat-count">12.1K</p>
+                    <p class="user-profile-social-stat-name">Читачі</p>
+                </div>
+                <div class="user-profile-social-stat-div">
+                    <p class="user-profile-social-stat-friends-count user-profile-social-stat-count">222</p>
+                    <p class="user-profile-social-stat-name">Друзі</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <div class="unfixed-right-panel" >
+        <div class="fast-message">
+            <div class="fast-message-content">
+                <input class="fast-message-content-input" type="text" placeholder="Про що ти зараз думаєш?">
+                <div class="fast-message-content-buttons">
+                    <button class="fast-message-content-button" type="button"><img src="{% static 'home_app/img/picture.png' %}"></button>
+                    <button class="fast-message-content-button" type="button"><img src="{% static 'home_app/img/emodji.png' %}"></button>
+                    <button class="fast-message-content-button-publish" type="button">
+                        <p>Публікація</p>
+                        <img src="{% static 'home_app/img/PlaneR.png' %}">
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="social-post">
+            
+            
+            <div class="social-post-user-info">
+                <div class="social-post-inner-user-info" >
+                    <div class="social-post-inner-user-info-total">
+                        <img src="{% static 'home_app/img/Avatar7.png' %}">
+                        <p>Lina Li</p>
+                    </div>
+                    <div class="social-post-inner-user-info-sign" >
+                        <img src="{% static 'home_app/img/sign.png' %}">
+                    </div>
+                </div>
+                <button class="social-post-dots">
+                    <img src="{% static 'home_app/img/Dots.png' %}">
+                </button>
+            </div>
+            <div class="social-post-info">
+                <div class="social-post-info-text" >
+                    <span>Перша публікація<br>
+                        <br>https://www.instagram.com/world.it.academy/?locale=ru
+                    </span>
+                </div>
+                <div class="social-post-info-photos">
+                    <div class="social-post-info-photos-group-1" >
+                        <img src="{% static 'home_app/img/2photo.jpg' %}">
+                        <img src="{% static 'home_app/img/photo-2.png' %}">
+                    </div>
+                </div>
+                <div class="social-post-info-stats">
+                    <div class="social-post-info-stat-likes">
+                        <img src="{% static 'home_app/img/like.png' %}">
+                        <p>999 Вподобань</p>
+                    </div>
+                    <div class="social-post-info-stat-views">
+                        <img src="{% static 'home_app/img/eye.png' %}">
+                        <p>17768 Переглядів</p>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="social-post-user-info">
+                <div class="social-post-inner-user-info" >
+                    <div class="social-post-inner-user-info-total">
+                        <img src="{% static 'home_app/img/Avatar7.png' %}">
+                        <p>Lina Li</p>
+                    </div>
+                    <div class="social-post-inner-user-info-sign" >
+                        <img src="{% static 'home_app/img/sign.png' %}">
+                    </div>
+                </div>
+                <button class="social-post-dots">
+                    <img src="{% static 'home_app/img/Dots.png' %}">
+                </button>
+            </div>
+            <div class="social-post-info">
+                <div class="social-post-info-text" >
+                    <span>Друга публікація<br>
+                    </span>
+                </div>
+                <div class="social-post-info-photos">
+                    <div class="social-post-info-photos-group-1" >
+                        <img src="{% static 'home_app/img/1photo.jpg' %}">
+                        <img src="{% static 'home_app/img/photo-2.png' %}">
+                    </div>
+                </div>
+                <div class="social-post-info-stats">
+                    <div class="social-post-info-stat-likes">
+                        <img src="{% static 'home_app/img/like.png' %}">
+                        <p>1023 Вподобань</p>
+                    </div>
+                    <div class="social-post-info-stat-views">
+                        <img src="{% static 'home_app/img/eye.png' %}">
+                        <p>12342 Переглядів</p>
+                    </div>
+                </div>
+            </div>
+              
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'home_app/js/home.js' %}"></script>
+{% endblock %}
