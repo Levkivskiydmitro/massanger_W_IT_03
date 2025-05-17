@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 
 {% load static %}
 
@@ -15,7 +15,7 @@
 {% block body %}
 <div class="window-back show">
     <div class="window">
-        <button id="close-btn"><img src="{% static 'img/Vector.css' %}"></button>
+        <button id="close-btn"><img src="{% static 'home_app/img/close.png' %}"></button>
         <h1>Створення публікації</h1>
         <div class="window-content">
             <div class="window-input">
@@ -29,8 +29,8 @@
             <div class="window-input">
                 <textarea name="">
                 Інколи найкращі ідеї народжуються в тиші
-Природа, книга і спокій — усе, що потрібно, аби перезавантажитись.
-#відпочинок #натхнення #життя #природа #читання #спокій #гармонія
+                Природа, книга і спокій — усе, що потрібно, аби перезавантажитись.
+                #відпочинок #натхнення #життя #природа #читання #спокій #гармонія
                 </textarea>
             </div>
             <div class="window-input">
@@ -45,13 +45,16 @@
             <div><button></button></div>
         </div>
         <div class="bottom">
-            <button class="outlined" id="img-btn"><img src="{% static 'img/Component3.png' %}" alt=""></button>
-            <button class="outlined" id="emoji-btn"><img src="{% static 'img/Component4.png' %}" alt=""></button>
+            <button class="outlined" id="img-btn">
+                <img src="{% static 'img/Component3.png' %}" alt="">
+            </button>
+            <button class="outlined" id="emoji-btn">
+                <img src="{% static 'img/Component4.png' %}" alt="">
+            </button>
             <button class="filled">Публікація<img src="{% static 'img/telegram.png' %}"></button>
         </div>
     </div>
 </div>
-
 
 <div class="content">
     <aside class="fixed-left-panel">
@@ -98,8 +101,6 @@
             </div>
         </div>
         <div class="social-post">
-            
-            
             <div class="social-post-user-info">
                 <div class="social-post-inner-user-info" >
                     <div class="social-post-inner-user-info-total">
@@ -122,7 +123,7 @@
                 </div>
                 <div class="social-post-info-photos">
                     <div class="social-post-info-photos-group-1" >
-                        <img src="{% static 'home_app/img/2photo.jpg' %}">
+                        <img src="{% static 'home_app/img/Frame.png' %}">
                         <img src="{% static 'home_app/img/photo-2.png' %}">
                     </div>
                 </div>
@@ -137,46 +138,6 @@
                     </div>
                 </div>
             </div>
-            
-
-            <div class="social-post-user-info">
-                <div class="social-post-inner-user-info" >
-                    <div class="social-post-inner-user-info-total">
-                        <img src="{% static 'home_app/img/Avatar7.png' %}">
-                        <p>Lina Li</p>
-                    </div>
-                    <div class="social-post-inner-user-info-sign" >
-                        <img src="{% static 'home_app/img/sign.png' %}">
-                    </div>
-                </div>
-                <button class="social-post-dots">
-                    <img src="{% static 'home_app/img/Dots.png' %}">
-                </button>
-            </div>
-            <div class="social-post-info">
-                <div class="social-post-info-text" >
-                    <span>Друга публікація<br>
-                    </span>
-                </div>
-                <div class="social-post-info-photos">
-                    <div class="social-post-info-photos-group-1" >
-                        <img src="{% static 'home_app/img/1photo.jpg' %}">
-                        <img src="{% static 'home_app/img/photo-2.png' %}">
-                    </div>
-                </div>
-                <div class="social-post-info-stats">
-                    <div class="social-post-info-stat-likes">
-                        <img src="{% static 'home_app/img/like.png' %}">
-                        <p>1023 Вподобань</p>
-                    </div>
-                    <div class="social-post-info-stat-views">
-                        <img src="{% static 'home_app/img/eye.png' %}">
-                        <p>12342 Переглядів</p>
-                    </div>
-                </div>
-            </div>
-              
-
         </div>
     </div>
 </div>
@@ -184,4 +145,4 @@
 
 {% block scripts %}
 <script src="{% static 'home_app/js/home.js' %}"></script>
-{% endblock %}
+{% endblock %}   
