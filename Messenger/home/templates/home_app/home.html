@@ -1,0 +1,314 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Головна сторінка
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'home_app/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/create.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+{% endblock %}
+
+{% block body %}
+<div class="content">
+
+<div class="window-back">
+    <form class="window" method="post">
+        {% csrf_token %}
+        <button id="close-btn"><img src="{% static 'home_app/img/close.png' %}"></button>
+        <h1>Створення публікації</h1>
+        <div class="window-content">
+            <div class="window-input">
+                <h3>Назва публікації</h3>
+                <input type="text" id="post-title" name="title" placeholder="Назва публікації">
+            </div>
+            <div class="window-input">
+                <h3>Тема публікації</h3>
+                <input type="text" id="post-topic" name ='topic' placeholder="Тема публікації">
+            </div>
+            <div class="window-input">
+                <textarea id="post-description" name="description">
+                Інколи найкращі ідеї народжуються в тиші
+                Природа, книга і спокій — усе, що потрібно, аби перезавантажитись.
+                #відпочинок #натхнення #життя #природа #читання #спокій #гармонія
+                </textarea>
+            </div>
+            <div class="window-input">
+                <h3>Посилання</h3>
+                <input type="text" id="post-link" name='link' placeholder="Посилання">
+            </div>
+        </div>
+        <div class="imgs-container">
+            <input type="file" id="post-img">
+        </div>
+        <div class="bottom">
+            <button class="outlined" id="img-btn">
+                <img src="{% static 'img/Component3.png' %}" alt="">
+            </button>
+            <button class="outlined" id="emoji-btn">
+                <img src="{% static 'img/Component4.png' %}" alt="">
+            </button>
+            <button id="publish-btn" type="submit" data-url="{% url 'create' %}">Публікація<img src="{% static 'img/telegram.png' %}"></button>
+        </div>
+    </form>
+</div>
+
+    <aside class="fixed-left-panel">
+        <div class="user-profile">
+            <div class="user-profile-main-info">
+                <img class="user-profile-photo" src="{% static 'home_app/img/UserPhoto.png' %}">
+                <div class="user-profile-username">
+                    {% if request.user.is_authenticated %}
+                        <p class="user-profile-name">{{ request.user.username }}</p>
+                    {% else %}
+                        <p class="user-profile-name">Lina Li</p>
+                    {% endif %}
+                    <p class="user-profile-called-as">@thelili</p>
+                </div>
+            </div>
+            <div class="user-profile-social-stats">
+                <div class="user-profile-social-stat-div" >
+                    <p class="user-profile-social-stat-publics-count user-profile-social-stat-count" id="user-profile-social-stat-publics-count">566</p>
+                    <p class="user-profile-social-stat-name">Дописи</p>
+                </div>
+                <div class="user-profile-social-stat-div" >
+                    <p class="user-profile-social-stat-followers-count user-profile-social-stat-count">12.1K</p>
+                    <p class="user-profile-social-stat-name">Читачі</p>
+                </div>
+                <div class="user-profile-social-stat-div">
+                    <p class="user-profile-social-stat-friends-count user-profile-social-stat-count">222</p>
+                    <p class="user-profile-social-stat-name">Друзі</p>
+                </div>
+            </div>
+        </div>
+        <div class="user-requests">
+            <div class="user-requests-titles">
+                <a class="user-requests-link" href="/requests">
+                    <img src="{% static 'home_app/img/people-requests.png' %}">
+                    <p class="user-requests-link-requests">Запити</p>
+                </a>
+                <a class="user-requests-link" href="/requests">
+                    <p class="user-requests-links-show-all" >Дивитись всі</p>
+                </a>
+            </div>
+            <div class="user-requests-peoples">
+                <div class="user-requests-people">
+                    <img src="{% static 'home_app/img/Avatar.png' %}">
+                    <div class="user-requests-people-stats" >
+                        <p class="user-requests-people-name" >Yehor Aungh</p>
+                        <p class="user-requests-people-followers" >4.3к підписників</p>
+                    </div>
+                </div>
+                <div class="user-requests-people">
+                    <img src="{% static 'home_app/img/Avatar2.png' %}">
+                    <div class="user-requests-people-stats" >
+                        <p class="user-requests-people-name" >Ann Ann</p>
+                        <p class="user-requests-people-followers" >1.6к підписників</p>
+                    </div>
+                </div>
+                <div class="user-requests-people">
+                    <img src="{% static 'home_app/img/Avatar3.png' %}">
+                    <div class="user-requests-people-stats" >
+                        <p class="user-requests-people-name" >Yeugen Jenua</p>
+                        <p class="user-requests-people-followers" >10.3к підписників</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="user-messages">
+            <div class="user-messages-titles">
+                <a class="user-messages-title-messages" href="">
+                    <img src="{% static 'home_app/img/chat.png' %}">
+                    <p class="" >Повідомлення</p>
+                </a>
+                <a class="user-messages-title-see-all" href="">
+                    <p>Дивитись всі</p>
+                </a>
+            </div>
+            <div class="user-messages-peoples">
+                <div class="user-messages-people message-checked">
+                    <div class="user-messages-people-inner">
+                        <img src="{% static 'home_app/img/Avatar4.png' %}">
+                        <div class="user-messages-people-inner-content">
+                            <div class="user-messages-people-inner-content-name-time">
+                                <p class="user-messages-people-inner-content-name" >Mona Lisa</p>
+                                <p class="user-messages-people-inner-content-time" >09:41</p>
+                            </div>
+                            <div class="user-messages-people-inner-content-message">
+                                <p>Привіт! Як справи?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-messages-people message-checked">
+                    <div class="user-messages-people-inner">
+                        <img src="{% static 'home_app/img/Avatar5.png' %}">
+                        <div class="user-messages-people-inner-content">
+                            <div class="user-messages-people-inner-content-name-time">
+                                <p class="user-messages-people-inner-content-name" >Ann Ti</p>
+                                <p class="user-messages-people-inner-content-time" >25.04.2025</p>
+                            </div>
+                            <div class="user-messages-people-inner-content-message">
+                                <p>Привіт!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-messages-people ">
+                    <div class="user-messages-people-inner">
+                        <img src="{% static 'home_app/img/Avatar6.png' %}">
+                        <div class="user-messages-people-inner-content">
+                            <div class="user-messages-people-inner-content-name-time">
+                                <p class="user-messages-people-inner-content-name" >Ness Ty</p>
+                                <p class="user-messages-people-inner-content-time" >25.04.2025</p>
+                            </div>
+                            <div class="user-messages-people-inner-content-message">
+                                <p>Привіт!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <div class="unfixed-right-panel">
+        <div class="fast-message">
+            <div class="fast-message-content">
+                <input class="fast-message-content-input" type="text" placeholder="Про що ти зараз думаєш?">
+                <div class="fast-message-content-buttons">
+                    <button class="fast-message-content-button" type="button"><img src="{% static 'home_app/img/picture.png' %}"></button>
+                    <button class="fast-message-content-button" type="button"><img src="{% static 'home_app/img/emodji.png' %}"></button>
+                    <button class="fast-message-content-button-publish" type="button">
+                        <p>Перейти до оформлення</p>
+                        <img src="{% static 'home_app/img/PlaneR.png' %}">
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="social-post">
+            <div class="social-post-user-info">
+                <div class="social-post-inner-user-info" >
+                    <div class="social-post-inner-user-info-total">
+                        <img src="{% static 'home_app/img/Avatar7.png' %}">
+                        <p>X_AE_A-13</p>
+                    </div>
+                    <div class="social-post-inner-user-info-sign" >
+                        <img src="{% static 'home_app/img/sign.png' %}">
+                    </div>
+                </div>
+                <button class="social-post-dots">
+                    <img src="{% static 'home_app/img/Dots.png' %}">
+                </button>
+            </div>
+            <div class="social-post-info">
+                <div class="social-post-info-text" >
+                    <span>Інколи найкращі ідеї народжуються в тиші 🌿<br>
+                        Природа, книга і спокій — усе, що потрібно, аби перезавантажитись.
+                        <p class="social-post-info-text-tags" >
+                            #відпочинок #натхнення #життя #природа #читання #спокій #гармонія
+                        </p>
+                    </span>
+                </div>
+                <div class="social-post-info-photos">
+                    <div class="social-post-info-photos-group-1" >
+                        <img src="{% static 'home_app/img/photo-1.png' %}">
+                        <img src="{% static 'home_app/img/photo-2.png' %}">
+                    </div>
+                    <div class="social-post-info-photos-group-2">
+                        <img src="{% static 'home_app/img/photo-3.png' %}">
+                        <img src="{% static 'home_app/img/photo-4.png' %}">
+                        <img src="{% static 'home_app/img/photo-5.png' %}">
+                    </div>
+                </div>
+                <div class="social-post-info-stats">
+                    <div class="social-post-info-stat-likes">
+                        <img src="{% static 'home_app/img/like.png' %}">
+                        <p>120 Вподобань</p>
+                    </div>
+                    <div class="social-post-info-stat-views">
+                        <img src="{% static 'home_app/img/eye.png' %}">
+                        <p>890 Переглядів</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="social-post">
+            <div class="social-post-user-info">
+                <div class="social-post-inner-user-info" >
+                    <div class="social-post-inner-user-info-total">
+                        <img src="{% static 'home_app/img/Avatar8.png' %}">
+                        <p>Alex_03</p>
+                    </div>
+                </div>
+                <button class="social-post-dots">
+                    <img src="{% static 'home_app/img/Dots.png' %}">
+                </button>
+            </div>
+            <div class="social-post-info">
+                <div class="social-post-info-text" >
+                    <span>буває такий настрій: просто лежиш і існуєш 😅<br>чай в одній руці, телефон в іншій, думки десь у космосі 🌌 і знаєте шо? норм
+                        <p class="social-post-info-text-tags" >
+                            #вайб
+                        </p>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="social-post">
+            <div class="social-post-user-info">
+                <div class="social-post-inner-user-info" >
+                    <div class="social-post-inner-user-info-total">
+                        <img src="{% static 'home_app/img/Avatar8.png' %}">
+                        <p>Alex_03</p>
+                    </div>
+                </div>
+                <button class="social-post-dots">
+                    <img src="{% static 'home_app/img/Dots.png' %}">
+                </button>
+            </div>
+            <div class="social-post-info">
+                <div class="social-post-info-text" >
+                    <span>буває такий настрій: просто лежиш і існуєш 😅<br>чай в одній руці, телефон в іншій, думки десь у космосі 🌌 і знаєте шо? норм
+                        <p class="social-post-info-text-tags" >
+                            #вайб
+                        </p>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="social-post">
+            <div class="social-post-user-info">
+                <div class="social-post-inner-user-info" >
+                    <div class="social-post-inner-user-info-total">
+                        <img src="{% static 'home_app/img/Avatar8.png' %}">
+                        <p>Alex_03</p>
+                    </div>
+                </div>
+                <button class="social-post-dots">
+                    <img src="{% static 'home_app/img/Dots.png' %}">
+                </button>
+            </div>
+            <div class="social-post-info">
+                <div class="social-post-info-text" >
+                    <span>буває такий настрій: просто лежиш і існуєш 😅<br>чай в одній руці, телефон в іншій, думки десь у космосі 🌌 і знаєте шо? норм
+                        <p class="social-post-info-text-tags" >
+                            #вайб
+                        </p>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+{% block scripts %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="main-container">
+    <div class="content">
+        <div class="switcher">
+            <div class="tab inactive-tab">
+               <a href="{% url 'reg' %}">Реєстрація</a>
+            </div>
+            <div class="tab  active-tab">
+               <p>Авторизація</p>
+               <div class="active-tab-line"></div>
+            </div>
+        </div>
+        <h1>Раді тебе знову бачити!</h1>
+        <form class="reg-form" id="form" method="post">
+            {% csrf_token %}
+            <div class="reg-form-main" >
+                {{ form.as_p }}
+                {{ form.errors }}
+            </div>
+            <button name="submitform" value="mainform" id="submitForm" type="submit">Увійти</button>
+            <div class="qr-inform">
+               <div class="qr-inform-title">
+                  <div class="qr-inform-lines"></div>
+                  <div class="qr-title">або увійдіть за допомогою QR-коду</div>
+                  <div class="qr-inform-lines"></div>
+               </div>
+               <div class="qr-img"><img src="{% static 'login/img/qr.png' %}"></div>
+            </div>
+         </form>
+        {% if codeform %}
+        <div class="popup" >
+            <form action="" method="post" >
+                {% csrf_token %}
+                {{ codeform.as_div }}
+                <button name="submitform" value="codeform" id="submitCodeForm" type="submit">Підтвердити</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+    <img class="back-img" src="{% static 'reg/img/background-mac-iphone.png' %}">
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{% static 'login/js/login.js' %}" ></script>
+
+{% endblock %}

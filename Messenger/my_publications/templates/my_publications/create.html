@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Публікації
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'home_app/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/create.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="window-back">
+    <form class="window" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <button id="close-btn" type="button"><img src="{% static 'home_app/img/close.png' %}"></button>
+        <h1>Створення публікації</h1>
+        <div class="window-content">
+            <div class="window-input">
+                <h3>Назва публікації</h3>
+                <input type="text" id="post-title" name="title" placeholder="Назва публікації">
+            </div>
+            <div class="window-input">
+                <h3>Тема публікації</h3>
+                <input type="text" id="post-topic" name ='topic' placeholder="Тема публікації">
+            </div>
+            <div class="window-input">
+                <textarea id="post-description" name="description">
+                Інколи найкращі ідеї народжуються в тиші
+                Природа, книга і спокій — усе, що потрібно, аби перезавантажитись.
+                #відпочинок #натхнення #життя #природа #читання #спокій #гармонія
+                </textarea>
+            </div>
+            <div class="window-input">
+                <h3>Посилання</h3>
+                <input type="text" id="post-link" name='link' placeholder="Посилання">
+            </div>
+        </div>
+        <div class="imgs-container">
+            <input type="file" id="post-img" name="img" style="display: none;">
+        </div>
+        <div class="bottom">
+            <button class="fast-message-content-button" id="post-img-btn" type="button"><img src="{% static 'home_app/img/picture.png' %}"></button>
+            <button class="fast-message-content-button" type="button"><img src="{% static 'home_app/img/emodji.png' %}"></button>
+            <button id="publish-btn" class="filled" type="submit" data-url="{% url 'create' %}">Публікація<img src="{% static 'img/telegram.png' %}"></button>
+        </div>
+    </form>
+</div>
+
+<form class="context-menu" method="post">
+    {% csrf_token %}
+    <button type="button" id="edit-btn" onclick="op()">Редагувати допис</button>
+    <hr color="#CDCED2">
+    <button type="submit" name="del-" id="del-btn">Видалити публікацію</button>
+</form>
+
+<div class="content">
+    <aside class="fixed-left-panel">
+        <div class="user-profile">
+            <div class="user-profile-main-info">
+                <img class="user-profile-photo" src="{% static 'home_app/img/UserPhoto.png' %}">
+                <div class="user-profile-username">
+                    {% if request.user.is_authenticated %}
+                        <p class="user-profile-name">{{ request.user.username }}</p>
+                    {% else %}
+                        <p class="user-profile-name">Lina Li</p>
+                    {% endif %}
+                    <p class="user-profile-called-as">@thelili</p>
+                </div>
+            </div>
+            <div class="user-profile-social-stats">
+                <div class="user-profile-social-stat-div">
+                    <p class="user-profile-social-stat-publics-count user-profile-social-stat-count" id="user-profile-social-stat-publics-count">566</p>
+                    <p class="user-profile-social-stat-name">Дописи</p>
+                </div>
+                <div class="user-profile-social-stat-div">
+                    <p class="user-profile-social-stat-followers-count user-profile-social-stat-count">12.1K</p>
+                    <p class="user-profile-social-stat-name">Читачі</p>
+                </div>
+                <div class="user-profile-social-stat-div">
+                    <p class="user-profile-social-stat-friends-count user-profile-social-stat-count">222</p>
+                    <p class="user-profile-social-stat-name">Друзі</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <div class="unfixed-right-panel">
+        <div class="fast-message">
+            <div class="fast-message-content">
+                <input class="fast-message-content-input" type="text" placeholder="Про що ти зараз думаєш?">
+                <div class="fast-message-content-buttons">
+                    <button class="fast-message-content-button" type="button"><img src="{% static 'home_app/img/picture.png' %}"></button>
+                    <button class="fast-message-content-button" type="button"><img src="{% static 'home_app/img/emodji.png' %}"></button>
+                    <button class="fast-message-content-button-publish" type="button">
+                        <p>Перейти до оформлення</p>
+                        <img src="{% static 'home_app/img/PlaneR.png' %}">
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% for post in posts %}
+        <div class="social-post">
+            <div class="social-post-user-info">
+                <div class="social-post-inner-user-info">
+                    <div class="social-post-inner-user-info-total">
+                        <img src="{% static 'home_app/img/Avatar7.png' %}">
+                        <p>{{ post.user }}</p>
+                    </div>
+                    <div class="social-post-inner-user-info-sign">
+                        <img src="{% static 'home_app/img/sign.png' %}">
+                    </div>
+                </div>
+                <button class="social-post-dots">
+                    <img src="{% static 'home_app/img/Dots.png' %}">
+                </button>
+            </div>
+            <div class="social-post-info">
+                <div class="social-post-info-text">
+                    <textarea readonly class="social-post-text-content" data-post-id="{{ post.id }}">
+{{ post.title }}
+{{ post.description }}
+#{{ post.tags }}
+{{ post.link }}
+                    </textarea>
+                </div>
+                <div class="social-post-info-photos">
+                    <div class="social-post-info-photos-group-1">
+                        {% if post.img %}
+                            <p><img src="{{ post.img.url }}" alt="Картинка публікації"></p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="social-post-info-stats">
+                    <div class="social-post-info-stat-likes">
+                        <img src="{% static 'home_app/img/like.png' %}">
+                        <p>{{ post.likes }} Вподобань</p>
+                    </div>
+                    <div class="social-post-info-stat-views">
+                        <img src="{% static 'home_app/img/eye.png' %}">
+                        <p>{{ post.views }} Переглядів</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/menu.js' %}"></script>
+<script src="{% static 'js/create.js' %}"></script>
+<script src="{% static 'js/area.js' %}"></script>
+{% endblock %}   
