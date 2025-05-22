@@ -19,10 +19,12 @@ from django.contrib import admin
 from django.urls import path
 from . import settings
 
-from login.views import authorization, LogoutView
+from login.views import authorization, LogOutView
 from reg.views import RegistrationView
 from home.views import HomeView
+from settings_app.views import SettingsView
 from my_publications.views import CreatePublicationView
+from settings_app.views import update_profile
 
 
 urlpatterns = [
@@ -30,8 +32,10 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('register/', RegistrationView.as_view(), name='reg'),
     path('login/', authorization, name='auth'),
-    path('log-out/', LogoutView.as_view(), name='logout'),
+    path('log-out/', LogOutView.as_view(), name='logout'),
     path('create/', CreatePublicationView.as_view(), name = 'create'),
+    path('settings/', SettingsView.as_view(), name='settings'),
+    path('update-profile/', update_profile, name='update_profile'),
 ]
 
 

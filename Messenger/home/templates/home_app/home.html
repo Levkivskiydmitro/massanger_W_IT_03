@@ -63,11 +63,17 @@
                 <img class="user-profile-photo" src="{% static 'home_app/img/UserPhoto.png' %}">
                 <div class="user-profile-username">
                     {% if request.user.is_authenticated %}
-                        <p class="user-profile-name">{{ request.user.username }}</p>
+                    <p class="user-profile-name">
+                        {% if request.user.get_full_name %}
+                            {{ request.user.get_full_name }}
+                        {% else %}
+                            {{ request.user.username }}
+                        {% endif %}
+                    </p>
                     {% else %}
                         <p class="user-profile-name">Lina Li</p>
                     {% endif %}
-                    <p class="user-profile-called-as">@thelili</p>
+                        <p class="user-profile-called-as">@thelili</p>
                 </div>
             </div>
             <div class="user-profile-social-stats">
@@ -305,9 +311,6 @@
     </div>
 </div>
 {% endblock %}
-
-
-
 
 {% block scripts %}
 <script src="{% static 'js/home.js' %}"></script>

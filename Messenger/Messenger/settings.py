@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'login',
     'home',
     'my_publications',
+    'settings_app',
 ]
 
 ASGI_APPLICATION = 'Messenger.asgi.application'
@@ -155,6 +156,6 @@ EMAIL_HOST_PASSWORD = '' #os.environ.get('APP_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-
+LOGIN_URL = 'auth'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'register'

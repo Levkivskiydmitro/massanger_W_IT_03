@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Cторінка налаштувань
+{% endblock %}
+
+{% block links %}\
+<link rel="stylesheet" href="{% static 'settings/css/settings.css' %}">
+<link rel="stylesheet" href="{% static 'home_app/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock %}
+
+{% block body %}
+<body>
+    <div class="main-container">
+
+        <div class="left-links">
+            {% if page == 'settings' %}
+                <a class="link" href="{% url 'settings' %}" style="background-color: #E9E5EE;"><p>Особиста інформація</p></a>
+            {% else %}
+                <a class="link" href="{% url 'settings' %}"><p>Особиста інформація</p></a>
+            {% endif %}
+            {% if page == 'settings' %}
+                <a class="link" href="{% url 'settings' %}" style="background-color: #E9E5EE;"><p>Альбоми</p></a>
+            {% else %}
+                <a class="link" href="{% url 'settings' %}"><p>Альбоми</p></a>
+            {% endif %}
+        </div>
+
+        <div class="container">
+            <div class="card">
+                <h2>Картка профілю</h2>
+                <button class="edit-button">Редагувати інформацію</button>
+                <div class="profile-card">
+                    <img class="user-profile-photo" src="{% static 'home_app/img/UserPhoto.png' %}">
+                    <h3>Lina Li</h3>
+                    <p>@thelli</p>
+                </div>
+            </div>
+        <form method="post" action="{% url 'update_profile' %}">
+            {% csrf_token %}
+            <div class="card">
+                <h2>Особиста інформація</h2>
+                <div class="info-group">
+                    <label>Ім'я</label>
+                    <input type="text" name="first_name" value="{{ user.first_name }}"/>
+                    <img class="show_img" src="{% static 'home_app/img/eye.png' %}">
+            
+                    <label>Прізвище</label>
+                    <input type="text" name="last_name" value="{{ user.last_name }}"/>
+                    <img class="show_img" src="{% static 'home_app/img/eye.png' %}">
+            
+                    <label>Дата народження</label>
+                    <input type="date" name="birth_date" value="{{ profile.birth_date|default_if_none:'' }}">
+                    <img class="show_img" src="{% static 'home_app/img/eye.png' %}">
+            
+                    <label>Електронна адреса</label>
+                    <input type="email" name="email" value="{{ user.email }}"/>
+                    <img class="show_img" src="{% static 'home_app/img/eye.png' %}">
+            
+                    <label>Пароль</label>
+                    <input type="password" name="password"/>
+                    <img class="show_img" src="{% static 'home_app/img/eye.png' %}">
+            
+                    <button type="submit" class="edit-button">Зберегти</button>
+                </div>
+            </div>
+        </form>
+        
+            <div class="card">
+                <button class="edit-button">Редагувати інформацію</button>
+                <h2>Варіанти підпису</h2>
+                <div class="signature-options">
+                    <label><input type="checkbox" checked /> Ім’я та прізвище:</label>
+                    <h3> Lina Li</h3>
+                    <label><input type="checkbox" checked /> Мій електронний підпис:</label>
+                    <img class="user-profile-photo" src="{% static 'home_app/img/sign.png' %}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

@@ -38,4 +38,3 @@ class CreatePublicationView(ListView):
         context["page"] = 'create'
         context["show_modal"] = False
         return context
-    
