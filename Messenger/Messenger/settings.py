@@ -151,8 +151,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'worldit.messenger.mail@gmail.com' #os.environ.get('EMAIL')
-EMAIL_HOST_PASSWORD = '' #os.environ.get('APP_PASSWORD')
+EMAIL_HOST_USER = 'dmitrolevkivskij048@gmail.com' #os.environ.get('EMAIL')
+EMAIL_HOST_PASSWORD = 'tjtk sdzb vtlt rijq' #os.environ.get('APP_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

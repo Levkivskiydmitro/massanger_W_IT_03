@@ -53,7 +53,7 @@
 
 <form class="context-menu" method="post">
     {% csrf_token %}
-    <button type="button" id="edit-btn" onclick="op()">Редагувати допис</button>
+    <button type="button" id="edit-btn">Редагувати допис</button>
     <hr color="#CDCED2">
     <button type="submit" name="del-" id="del-btn">Видалити публікацію</button>
 </form>
@@ -114,12 +114,12 @@
                         <img src="{% static 'home_app/img/sign.png' %}">
                     </div>
                 </div>
-                <button class="social-post-dots">
+                <button class="social-post-dots" data-post-id="{{ post.id }}">
                     <img src="{% static 'home_app/img/Dots.png' %}">
                 </button>
             </div>
             <div class="social-post-info">
-                <div class="social-post-info-text">
+                <div class="social-post-info-text" data-post-id="{{ post.id }}">
                     <textarea readonly class="social-post-text-content" data-post-id="{{ post.id }}">
 {{ post.title }}
 {{ post.description }}

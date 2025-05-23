@@ -17,6 +17,7 @@
                <div class="active-tab-line"></div>
             </div>
         </div>
+        {% if form %}
         <h1>Раді тебе знову бачити!</h1>
         <form class="reg-form" id="form" method="post">
             {% csrf_token %}
@@ -25,21 +26,28 @@
                 {{ form.errors }}
             </div>
             <button name="submitform" value="mainform" id="submitForm" type="submit">Увійти</button>
-            <div class="qr-inform">
+            <!--<div class="qr-inform">
                <div class="qr-inform-title">
                   <div class="qr-inform-lines"></div>
                   <div class="qr-title">або увійдіть за допомогою QR-коду</div>
                   <div class="qr-inform-lines"></div>
                </div>
                <div class="qr-img"><img src="{% static 'login/img/qr.png' %}"></div>
-            </div>
+            </div>-->
          </form>
+        {% endif %}
         {% if codeform %}
         <div class="popup" >
             <form action="" method="post" >
                 {% csrf_token %}
-                {{ codeform.as_div }}
-                <button name="submitform" value="codeform" id="submitCodeForm" type="submit">Підтвердити</button>
+                <div>
+                <input type="text" placeholder="0" name="num1" class="code-input" maxlength="1">
+                <input type="text" placeholder="0" name="num2" class="code-input" maxlength="1">
+                <input type="text" placeholder="0" name="num3" class="code-input" maxlength="1">
+                <input type="text" placeholder="0" name="num4" class="code-input" maxlength="1">
+                <input type="text" placeholder="0" name="num5" class="code-input" maxlength="1">
+                </div>
+                <button name="submitform" value="codeform" id="submitForm" type="submit">Підтвердити</button>
             </form>
         </div>
         {% endif %}

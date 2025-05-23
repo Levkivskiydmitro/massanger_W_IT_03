@@ -90,14 +90,14 @@ h1{
     flex-direction: column;
     gap: 6px;
 }
-.reg-form-inputs label{
+.reg-form-main label{
     font-weight: 400;
     font-size: 16px;
     line-height: 100%;
     letter-spacing: -0.7%;
     color: #070A1C;
 }
-.reg-form-inputs input{
+.reg-form-main input{
     width: 399px;
     height: 42px;
     border-radius: 10px;
@@ -107,12 +107,33 @@ h1{
     outline: none;
     /* color: #81818D; */
 }
-.reg-form-inputs input::placeholder{
+.reg-form-main input::placeholder{
     letter-spacing: -0.7%;
     line-height: 22px;
     font-size: 16px;
     font-weight: 400;
     color: #81818D;
+}
+.popup form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.popup form div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.popup input {
+    font-size: 16px;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 10px 16px;
 }
 #submitForm{
     background-color: #543C52;

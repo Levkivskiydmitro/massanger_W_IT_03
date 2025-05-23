@@ -8,3 +8,5 @@ passwordEye.addEventListener('click', () => {
         passwordInput.type = 'password';
     }
 })
+
+const inputs = document.querySelectorAll('.code-input');

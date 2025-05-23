@@ -5,7 +5,6 @@ $(document).ready(function () {
     const $edit = $('#edit-btn');
     const $areas = $('.social-post-text-content');
 
-    // Показ контекстного меню
     $('.social-post-dots').on('click', function () {
         const $btn = $(this);
         const rect = this.getBoundingClientRect();
@@ -23,7 +22,6 @@ $(document).ready(function () {
         $menu.toggleClass('show');
     });
 
-    // Редактирование поста
     $edit.on('click', function () {
         const postId = $(this).data('post-id');
 
@@ -33,11 +31,10 @@ $(document).ready(function () {
 
         if ($targetArea.length) {
             $targetArea.removeAttr('readonly').focus();
-            $('#edit-post-id').val(postId); // Вставляем ID в скрытое поле формы
+            $('#edit-post-id').val(postId); 
         }
     });
 
-    // Автосохранение при вводе текста
     let typingTimer;
     const typingInterval = 1000;
 
@@ -76,7 +73,7 @@ $(document).ready(function () {
             return;
         }
 
-        if (confirm('Вы уверены, что хотите удалить этот пост?')) {
+
             // Создание и отправка скрытой формы
             const $form = $('<form>', {
                 method: 'POST',
@@ -99,6 +96,6 @@ $(document).ready(function () {
 
             $('body').append($form);
             $form.submit();
-        }
+        
     });
 });
