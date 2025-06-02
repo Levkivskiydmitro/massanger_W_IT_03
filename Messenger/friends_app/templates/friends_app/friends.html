@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Cторінка друзів
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/friends.css' %}">
+<link rel="stylesheet" href="{% static 'home_app/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock %}
+
+{% block left %}
+    <div class="left-links">
+        <a class="link active" href="#" data-target="all">Головна</a>
+        <a class="link" href="#" data-target="requests">Запити</a>
+        <a class="link" href="#" data-target="recommendations">Рекомендації</a>
+        <a class="link" href="#" data-target="all-friends">Всі друзі</a>
+    </div>
+{% endblock %}
+
+{% block right %}
+
+        <div class="card tab-section" id="requests">
+            <p>Запити</p>
+            <button class="edit-button" data-target="requests">Дивитись всі</button>
+            <div class="friends-grid">
+                {% for user in friend_requests %}
+                <div class="profile-card">
+                    <img src="{% static 'home_app/img/Avatar.png' %}">
+                    <h3>{{ user.name }}</h3>
+                    <p>@{{ user.username }}</p>
+                    <div class="action-buttons">
+                        <button class="confirm">Підтвердити</button>
+                        <button class="delete">Видалити</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card tab-section" id="recommendations" style="display: none;">
+            <h2>Рекомендації</h2>
+            <button class="edit-button" data-target="recommendations">Дивитись всі</button>
+            <div class="friends-grid">
+                {% for user in recommendations %}
+                <div class="profile-card">
+                    <img src="{% static 'home_app/img/Avatar.png' %}">
+                    <h3>{{ user.name }}</h3>
+                    <p>@{{ user.username }}</p>
+                    <div class="action-buttons">
+                        <button class="add">Додати</button>
+                        <button class="delete">Видалити</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card tab-section" id="all-friends" style="display: none;">
+            <h2>Всі друзі</h2>
+            <button class="edit-button" data-target="all-friends">Дивитись всі</button>
+            <div class="friends-grid">
+                {% for user in all_friends %}
+                <div class="profile-card">
+                    <img src="{% static 'home_app/img/Avatar.png' %}">
+                    <h3>{{ user.name }}</h3>
+                    <p>@{{ user.username }}</p>
+                    <div class="action-buttons">
+                        <button class="message">Повідомлення</button>
+                        <button class="delete">Видалити</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/friends.js' %}"></script>
+{% endblock %}

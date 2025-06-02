@@ -17,7 +17,22 @@
                 <a href="{% url 'auth' %}">Авторизація</a>
             </div>
         </div>
-        <h1>Приєднуйся до World IT</h1>
+        {% if codeform %}
+        <div class="popup" >
+            <form action="" method="post" >
+                {% csrf_token %}
+                <div>
+                <input type="text" placeholder="0" name="num1" class="code-input" maxlength="1">
+                <input type="text" placeholder="0" name="num2" class="code-input" maxlength="1">
+                <input type="text" placeholder="0" name="num3" class="code-input" maxlength="1">
+                <input type="text" placeholder="0" name="num4" class="code-input" maxlength="1">
+                <input type="text" placeholder="0" name="num5" class="code-input" maxlength="1">
+                </div>
+                <button name="submitform" value="codeform" id="submitForm" type="submit">Підтвердити</button>
+            </form>
+        </div>
+        {% else %}
+                <h1>Приєднуйся до World IT</h1>
         <form class="reg-form" id="form" method="post">
             {% csrf_token %}
             <div class="reg-form-main" >
@@ -38,14 +53,6 @@
             </div>
             <button name="submitform" value="mainform" id="submitForm" type="submit">Створити акаунт</button>
         </form>
-        {% if codeform %}
-        <div class="popup" >
-            <form action="" method="post" >
-                {% csrf_token %}
-                {{ codeform.as_div }}
-                <button name="submitform" value="codeform" id="submitCodeForm" type="submit">Підтвердити</button>
-            </form>
-        </div>
         {% endif %}
     </div>
     <img class="back-img" src="{% static 'reg/img/background-mac-iphone.png' %}">
