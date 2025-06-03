@@ -12,18 +12,19 @@ Cторінка друзів
 <link rel="stylesheet" href="{% static 'css/base.css' %}">
 {% endblock %}
 
-{% block body %}
-<div class="main-container">
+{% block left %}
     <div class="left-links">
         <a class="link active" href="#" data-target="all">Головна</a>
         <a class="link" href="#" data-target="requests">Запити</a>
         <a class="link" href="#" data-target="recommendations">Рекомендації</a>
         <a class="link" href="#" data-target="all-friends">Всі друзі</a>
     </div>
+{% endblock %}
 
-    <div class="container">
+{% block right %}
+
         <div class="card tab-section" id="requests">
-            <h2>Запити</h2>
+            <p>Запити</p>
             <button class="edit-button" data-target="requests">Дивитись всі</button>
             <div class="friends-grid">
                 {% for user in friend_requests %}
@@ -75,8 +76,6 @@ Cторінка друзів
                 {% endfor %}
             </div>
         </div>
-    </div>
-</div>
 {% endblock %}
 
 {% block scripts %}

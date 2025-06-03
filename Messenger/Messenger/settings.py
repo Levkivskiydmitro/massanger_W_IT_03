@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'my_publications',
     'settings_app',
     'friends_app',
+    'chat',
 ]
 
 ASGI_APPLICATION = 'Messenger.asgi.application'

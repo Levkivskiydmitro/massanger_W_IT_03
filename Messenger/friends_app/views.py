@@ -6,6 +6,7 @@ class FriendsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['page'] = 'friends'
         context['friend_requests'] = [
             {'id': 1, 'name': 'Yehor Aung', 'username': 'theliii', 'avatar_url': 'https://via.placeholder.com/100'},
             {'id': 2, 'name': 'Ann Ann', 'username': 'theliii', 'avatar_url': 'https://via.placeholder.com/100'},

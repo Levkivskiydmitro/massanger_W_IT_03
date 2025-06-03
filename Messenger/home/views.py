@@ -1,7 +1,8 @@
 from django.views.generic import ListView
 from my_publications.models import User_Post
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class HomeView(ListView):
+class HomeView(LoginRequiredMixin, ListView):
     model = User_Post
     template_name = "home_app/home.html"
     context_object_name = 'posts'

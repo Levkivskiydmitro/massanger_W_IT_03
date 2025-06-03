@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Cторінка альбомів
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'settings/css/settings.css' %}">
+<link rel="stylesheet" href="{% static 'home_app/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock %}
+
+{% block left %}
+    <div class="left-links">
+        <a class="link" href="{% url 'settings' %}" style="color: #81818D !important;"><p>Особиста інформація</p></a>
+        <a class="link" href="{% url 'albums' %}"><p style="text-decoration: underline !important; text-underline-offset: 6px;">Альбоми</p></a>
+    </div>
+{% endblock %}
+
+{% block window %}
+    <div class="window-back">
+        <form class="window" method="post" enctype="multipart/form-data">
+        <div>
+            <h1>Створити альбом</h1>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <label for="name">Назва альбому</label>
+            <input type="text" name="name">
+            <label for="topic">Оберіть тему</label>
+            <select name="topic" id="topic">
+                <option value="nature">Природа</option>
+                <option value="travel">Подорож</option>
+                <option value="nature">Природа</option>
+            </select>
+            <label for="">Рік альбому</label>
+        </div>
+        </form>
+    </div>
+ 
+{% endblock %}
+
+{% block right %}
+        {% block container %}
+        <div class="container">
+            <div class="card">
+                <div class="center header">
+                    <h2>Мої фото</h2>
+                    <button class="edit-button" id="edit-my-photos-button"><img src="{% static 'home_app/img/picture.png' %}">Додати фото</button>
+                </div>
+                <div class="my-photos-collection">
+                    <div class="preview-photo">
+                        <img src="{% static 'home_app/img/User.jpg' %}">
+                        <div class="center">
+                            <button class="center"><img src="{% static 'img/eye.svg' %}"></button>
+                            <button class="center"><img src="{% static 'img/bin.svg' %}"></button>
+                        </div>
+                    </div>
+                    <input type="file" id="collection-img" name="img" style="display: none;">
+                </div>
+            </div>
+            <div class="card">
+                <div class="center header">
+                    <p>Немає ще жодного альбому</p>
+                    <button class="edit-button" id="create-new-album-button"><img src="{% static 'img/plus.svg' %}">Створити альбом</button>
+                    <div class="imgs-container">
+                        <div><img src="" id="img-preview-1" style="display: none;" alt="preview"><button id="img-delete-btn" style="display: none;" type="button"></button></div>
+                        <input type="file" id="album-img" name="img" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/albums.js' %}"></script>
+{% endblock %}

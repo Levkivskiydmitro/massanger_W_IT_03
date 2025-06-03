@@ -12,9 +12,10 @@ body {
 }
 
 .left-links {
-    width: 200px;
-    background-color: #f3f0f9;
-    padding: 40px 20px;
+    width: 15%;
+    padding-top: 40px;
+    padding-left: 40px;
+    width: 254px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -23,16 +24,13 @@ body {
 .link {
     text-decoration: none;
     color: #40203b;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 16px;
-    padding: 10px 15px;
-    border-radius: 8px;
-    transition: background-color 0.3s;
 }
 
-.link:hover,
 .link.active {
-    background-color: #e9e5ee;
+    text-decoration: underline !important; 
+    text-underline-offset: 6px;
 }
 
 .container {
@@ -44,27 +42,33 @@ body {
     box-sizing: border-box;
 }
 
+.unfixed-right-panel {
+    margin-left: 191px !important;
+}
+
 .card {
     position: relative;
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: 10px;
     border: 1px solid #cdced2;
-    padding: 40px;
+    width: 923px;
+    padding: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.card h2 {
+.card p {
+    font-size: 16px !important;
     margin: 0 0 20px 0;
 }
 
 .edit-button {
     position: absolute;
-    top: 30px;
-    right: 30px;
-    padding: 6px 14px;
+    top: 10px;
+    right: 20px;
+    padding: 10px 16px;
     background-color: #fff;
     color: #40203b;
-    border: 2px solid #40203b;
+    border: none;
     border-radius: 999px;
     font-weight: 600;
     font-size: 14px;
@@ -85,7 +89,7 @@ body {
 .profile-card {
     background-color: #fff;
     border: 1px solid #e0dce3;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 20px;
     text-align: center;
     box-shadow: 0 0 10px rgba(64, 32, 59, 0.05);
@@ -110,11 +114,11 @@ body {
 }
 
 .action-buttons button {
-    padding: 8px 18px;
+    padding: 10px 16px;
     border: none;
     border-radius: 999px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
     color: #fff;
     transition: background-color 0.3s ease;
@@ -127,8 +131,9 @@ body {
 }
 
 .action-buttons .delete {
-    background-color: #d9d9d9;
-    color: #000;
+    background-color: white;
+    color: #543C52;
+    border: 1px solid #543C52;
 }
 
 .action-buttons button:hover {

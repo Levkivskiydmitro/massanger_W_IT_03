@@ -12,27 +12,19 @@ Cторінка налаштувань
 <link rel="stylesheet" href="{% static 'css/base.css' %}">
 {% endblock %}
 
-{% block body %}
-<body>
-    <div class="main-container">
+{% block left %}
 
         <div class="left-links">
-            {% if page == 'settings' %}
-                <a class="link" href="{% url 'settings' %}" style="background-color: #E9E5EE;"><p>Особиста інформація</p></a>
-            {% else %}
-                <a class="link" href="{% url 'settings' %}"><p>Особиста інформація</p></a>
-            {% endif %}
-            {% if page == 'settings' %}
-                <a class="link" href="{% url 'settings' %}" style="background-color: #E9E5EE;"><p>Альбоми</p></a>
-            {% else %}
-                <a class="link" href="{% url 'settings' %}"><p>Альбоми</p></a>
-            {% endif %}
+            <a class="link" href="{% url 'settings' %}" style="text-decoration: underline !important; text-underline-offset: 6px;"><p>Особиста інформація</p></a>
+            <a class="link" href="{% url 'albums' %}"><p style="color: #81818D !important;">Альбоми</p></a>
         </div>
-
-        <div class="container">
+{% endblock %}
+        {% block right %}
             <div class="card">
-                <h2>Картка профілю</h2>
-                <button class="edit-button">Редагувати інформацію</button>
+                <div class="center header">
+                    <h2>Картка профілю</h2>
+                    <button class="edit-button"><img src="{% static 'img/pencil.svg' %}">Редагувати інформацію</button>
+                </div>
                 <div class="profile-card">
                     <img class="user-profile-photo" src="{% static 'home_app/img/UserPhoto.png' %}">
                     <h3>Lina Li</h3>
@@ -64,14 +56,16 @@ Cторінка налаштувань
                     <input type="password" name="password"/>
                     <img class="show_img" src="{% static 'home_app/img/eye.png' %}">
             
-                    <button type="submit" class="edit-button">Зберегти</button>
+                    <button type="submit" class="edit-button"><img src="{% static 'img/pencil.svg' %}">Редагувати інформацію</button>
                 </div>
             </div>
         </form>
         
             <div class="card">
-                <button class="edit-button">Редагувати інформацію</button>
-                <h2>Варіанти підпису</h2>
+                <div class="center header">
+                    <h2>Варіанти підпису</h2>
+                    <button class="edit-button"><img src="{% static 'img/pencil.svg' %}">Редагувати інформацію</button>
+                </div>
                 <div class="signature-options">
                     <label><input type="checkbox" checked /> Ім’я та прізвище:</label>
                     <h3> Lina Li</h3>
@@ -79,11 +73,8 @@ Cторінка налаштувань
                     <img class="user-profile-photo" src="{% static 'home_app/img/sign.png' %}"/>
                 </div>
             </div>
-        </div>
-    </div>
-</body>
-</html>
-{% endblock %}
+    {% endblock %}
+
 
 {% block scripts %}
 {% endblock %}

@@ -24,19 +24,22 @@ from reg.views import registration
 from home.views import HomeView
 from settings_app.views import SettingsView
 from my_publications.views import CreatePublicationView
-from settings_app.views import update_profile
+from settings_app.views import update_profile, AlbumsView
 from friends_app.views import FriendsView
+from chat.views import ChatView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', HomeView.as_view(), name='home'),
-    path('register/', registration, name='reg'),
-    path('login/', authorization, name='auth'),
-    path('log-out/', LogOutView.as_view(), name='logout'),
+    path('', HomeView.as_view(), name = 'home'),
+    path('register/', registration, name = 'reg'),
+    path('login/', authorization, name = 'auth'),
+    path('log-out/', LogOutView.as_view(), name = 'logout'),
     path('create/', CreatePublicationView.as_view(), name = 'create'),
-    path('settings/', SettingsView.as_view(), name='settings'),
+    path('settings/', SettingsView.as_view(), name = 'settings'),
+    path('albums/', AlbumsView.as_view(), name = 'albums'),
     path('update-profile/', update_profile, name='profile'),
     path('friends/', FriendsView.as_view(), name='friends'),
+    path('messages/', ChatView.as_view(), name = 'chat'),
 ]
 
 if settings.DEBUG:

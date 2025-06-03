@@ -1,9 +1,13 @@
+from django.views.generic import TemplateView
+from django.shortcuts import redirect, render
+from django.contrib.auth.models import User
+from django.views import View
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from .models import Profile
 from django.core.exceptions import ObjectDoesNotExist
+from .forms import AlbumForm
 from datetime import datetime
 
 class SettingsView(TemplateView):
@@ -29,4 +33,13 @@ def update_profile(request):
                 pass
         user.save()
         profile.save()
-        return redirect('settings')
+        return render(request, "settings_app/settings.html", {"page": "settings"})
+    
+class AlbumsView(TemplateView):
+    template_name = "settings_app/albums.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page"] = 'albums'
+        context["form"] = AlbumForm()
+        return context

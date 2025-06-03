@@ -141,3 +141,29 @@ main{
     cursor: pointer;
     background-color: #E9E5EE;
 }
+body::-webkit-scrollbar {
+    width: 0;
+}
+::-webkit-scrollbar {
+    width: 14px;
+    background-color: #E9E5EE;
+}
+::-webkit-scrollbar-thumb {
+    background: #543C52;
+    background-clip: content-box;
+    border: 2px solid transparent;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #543C52;
+    background-clip: content-box;
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+}
