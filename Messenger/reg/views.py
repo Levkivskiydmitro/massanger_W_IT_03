@@ -9,84 +9,71 @@ from .models import RegistrationCodes
 from django.http import HttpRequest, HttpResponse
 import secrets, string
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from django.http import HttpRequest, HttpResponse
 from django.core.mail import send_mail
 from .forms import RegistrationForm, CodeForm
 from .models import RegistrationCodes
 from django.contrib.auth.models import User
-import secrets
-import string
+import secrets, string, random
 
-class RegistrationView(CreateView):
-    template_name = 'reg/reg.html'
-    context = {'form': RegistrationForm(), 'page': 'reg'}
+def generate_code(length=5):
+    return ''.join(random.choices('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', k=length))
 
-    def get(self, request: HttpRequest):
-        return render(request, self.template_name, self.context)
+def registration(request):
+    context = {}
+    if request.method == 'POST' and request.POST.get('submitform') == 'codeform':
+        code_entered = ''.join([
+            request.POST.get('num1', ''),
+            request.POST.get('num2', ''),
+            request.POST.get('num3', ''),
+            request.POST.get('num4', ''),
+            request.POST.get('num5', '')
+        ]).upper()
 
-    def post(self, request: HttpRequest):
-        button = request.POST.get('submitform')
-        
-        if button == 'mainform':
-            return self._handle_main_form(request)
-        elif button == 'codeform':
-            return self._handle_code_form(request)
-        return render(request, self.template_name, self.context)
+        correct_code = request.session.get('auth_code')
+        email = request.session.get('email')
+        password = request.session.get('password')
 
-    def _handle_main_form(self, request: HttpRequest):
+        if code_entered == correct_code and email and password:
+            User.objects.create_user(username=email, email=email, password=password)
+            request.session.pop('auth_code', None)
+            request.session.pop('email', None)
+            request.session.pop('password', None)
+            return redirect('auth')
+        else:
+            context['codeform'] = True
+            context['code_error'] = 'Код невірний'
+
+    elif request.method == 'POST':
         form = RegistrationForm(request.POST)
-        if not form.is_valid():
-            return render(request, self.template_name, self.context)
-        
-        if form.cleaned_data['password'] != form.cleaned_data['confirm_password']:
-            return HttpResponse("Паролі не співпадають")
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
 
-        email = form.cleaned_data['email']
-        code = ''.join(secrets.choice(string.digits) for _ in range(6))
-        
-        RegistrationCodes.objects.create(email=email, code=code)
-        send_mail(
-            'Підтвердіть Електронну Адресу',
-            f'Дякуємо що користуєтесь World IT Messenger!\nКод підтвердження реєстрації: {code}',
-            None,
-            [email],
-        )
-        
-        response = render(request, self.template_name, {
-            'form': RegistrationForm(),
-            'codeform': CodeForm()
-        })
-        response.set_cookie('email', email)
-        response.set_cookie('password', form.cleaned_data['password'])
-        return response
+            code = generate_code()
+            request.session['auth_code'] = code
+            request.session['email'] = email
+            request.session['password'] = password
 
-    def _handle_code_form(self, request: HttpRequest):
-        form = CodeForm(request.POST)
-        context = {'form': RegistrationForm(), 'codeform': CodeForm(), 'page': 'reg'}
-        
-        if not form.is_valid():
-            return render(request, self.template_name, context)
-        
-        email = request.COOKIES.get('email')
-        if not email or not RegistrationCodes.objects.filter(email=email).exists():
-            return render(request, self.template_name, context)
+            try:
+                send_mail(
+                    subject='Код підтвердження',
+                    message=f'Ваш код підтвердження: {code}',
+                    from_email=None,
+                    recipient_list=[email],
+                    fail_silently=False,
+                )
+            except Exception as e:
+                print(e)
 
-        if User.objects.filter(username=email).exists():
-            return render(request, self.template_name, context)
+            context['codeform'] = True
+        else:
+            context['form'] = form
+    else:
+        context['form'] = RegistrationForm()
 
-        auth_code = RegistrationCodes.objects.get(email=email).code
-        if form.cleaned_data['code'] != auth_code:
-            return render(request, self.template_name, context)
+    context.update({'page': 'register'})
 
-        User.objects.create_user(
-            username=email,
-            email=email,
-            password=request.COOKIES.get('password')
-        )
-        
-        response = render(request, self.template_name, context)
-        response.delete_cookie('email')
-        response.delete_cookie('password')
-        return response
+    return render(request, 'reg/reg.html', context)

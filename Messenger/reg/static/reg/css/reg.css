@@ -114,6 +114,28 @@ h1{
     font-weight: 400;
     color: #81818D;
 }
+
+.popup form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.popup form div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.popup input {
+    font-size: 16px;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 10px 16px;
+}
 #submitForm{
     background-color: #543C52;
     width: 399px;
@@ -132,6 +154,7 @@ h1{
 #submitForm:hover{
     cursor: pointer;
 }
+
 #password-eye img, #confirmation-password-eye img{
     width: 20px;
     height: 20px;

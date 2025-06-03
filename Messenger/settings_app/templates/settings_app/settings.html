@@ -6,7 +6,7 @@
 Cторінка налаштувань
 {% endblock %}
 
-{% block links %}\
+{% block links %}
 <link rel="stylesheet" href="{% static 'settings/css/settings.css' %}">
 <link rel="stylesheet" href="{% static 'home_app/css/home.css' %}">
 <link rel="stylesheet" href="{% static 'css/base.css' %}">
@@ -39,7 +39,7 @@ Cторінка налаштувань
                     <p>@thelli</p>
                 </div>
             </div>
-        <form method="post" action="{% url 'update_profile' %}">
+        <form method="post" action="{% url 'profile' %}">
             {% csrf_token %}
             <div class="card">
                 <h2>Особиста інформація</h2>

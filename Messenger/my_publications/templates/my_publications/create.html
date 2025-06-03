@@ -30,9 +30,6 @@
             </div>
             <div class="window-input">
                 <textarea id="post-description" name="description">
-                Інколи найкращі ідеї народжуються в тиші
-                Природа, книга і спокій — усе, що потрібно, аби перезавантажитись.
-                #відпочинок #натхнення #життя #природа #читання #спокій #гармонія
                 </textarea>
             </div>
             <div class="window-input">
@@ -41,6 +38,7 @@
             </div>
         </div>
         <div class="imgs-container">
+            <div><img src="" id="img-preview-1" style="display: none;" alt="preview"><button id="img-delete-btn" style="display: none;" type="button"></button></div>
             <input type="file" id="post-img" name="img" style="display: none;">
         </div>
         <div class="bottom">
@@ -120,12 +118,15 @@
             </div>
             <div class="social-post-info">
                 <div class="social-post-info-text" data-post-id="{{ post.id }}">
-                    <textarea readonly class="social-post-text-content" data-post-id="{{ post.id }}">
+                    <form method="post">
+                        {% csrf_token %}
+                        <textarea readonly class="social-post-text-content" data-post-id="{{ post.id }}">
 {{ post.title }}
 {{ post.description }}
 #{{ post.tags }}
 {{ post.link }}
-                    </textarea>
+                        </textarea>
+                    </form>
                 </div>
                 <div class="social-post-info-photos">
                     <div class="social-post-info-photos-group-1">

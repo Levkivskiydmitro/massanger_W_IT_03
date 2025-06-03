@@ -64,10 +64,10 @@
                 <div class="user-profile-username">
                     {% if request.user.is_authenticated %}
                     <p class="user-profile-name">
-                        {% if request.user.get_full_name %}
-                            {{ request.user.get_full_name }}
+                        {% if request.user.get_full_name|length > 15 %}
+                            {{ request.user.get_full_name|slice:":15" }}...
                         {% else %}
-                            {{ request.user.username }}
+                            {{ request.user.username|slice:":15" }}...
                         {% endif %}
                     </p>
                     {% else %}
@@ -182,6 +182,7 @@
         </div>
     </aside>
     <div class="unfixed-right-panel">
+    {% if posts %}
         <div class="fast-message">
             <div class="fast-message-content">
                 <input class="fast-message-content-input" type="text" placeholder="Про що ти зараз думаєш?">
@@ -195,119 +196,67 @@
                 </div>
             </div>
         </div>
+        {% for post in posts %}
         <div class="social-post">
             <div class="social-post-user-info">
-                <div class="social-post-inner-user-info" >
+                <div class="social-post-inner-user-info">
                     <div class="social-post-inner-user-info-total">
                         <img src="{% static 'home_app/img/Avatar7.png' %}">
-                        <p>X_AE_A-13</p>
+                        <p>{{ post.user }}</p>
                     </div>
-                    <div class="social-post-inner-user-info-sign" >
+                    <div class="social-post-inner-user-info-sign">
                         <img src="{% static 'home_app/img/sign.png' %}">
                     </div>
                 </div>
-                <button class="social-post-dots">
+                <button class="social-post-dots" data-post-id="{{ post.id }}">
                     <img src="{% static 'home_app/img/Dots.png' %}">
                 </button>
             </div>
             <div class="social-post-info">
-                <div class="social-post-info-text" >
-                    <span>Інколи найкращі ідеї народжуються в тиші 🌿<br>
-                        Природа, книга і спокій — усе, що потрібно, аби перезавантажитись.
-                        <p class="social-post-info-text-tags" >
-                            #відпочинок #натхнення #життя #природа #читання #спокій #гармонія
-                        </p>
-                    </span>
+                <div class="social-post-info-text" data-post-id="{{ post.id }}">
+                    <textarea readonly class="social-post-text-content" data-post-id="{{ post.id }}">
+{{ post.title }}
+{{ post.description }}
+#{{ post.tags }}
+{{ post.link }}
+                    </textarea>
                 </div>
                 <div class="social-post-info-photos">
-                    <div class="social-post-info-photos-group-1" >
-                        <img src="{% static 'home_app/img/photo-1.png' %}">
-                        <img src="{% static 'home_app/img/photo-2.png' %}">
-                    </div>
-                    <div class="social-post-info-photos-group-2">
-                        <img src="{% static 'home_app/img/photo-3.png' %}">
-                        <img src="{% static 'home_app/img/photo-4.png' %}">
-                        <img src="{% static 'home_app/img/photo-5.png' %}">
+                    <div class="social-post-info-photos-group-1">
+                        {% if post.img %}
+                            <p><img src="{{ post.img.url }}" alt="Картинка публікації"></p>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="social-post-info-stats">
                     <div class="social-post-info-stat-likes">
                         <img src="{% static 'home_app/img/like.png' %}">
-                        <p>120 Вподобань</p>
+                        <p>{{ post.likes }} Вподобань</p>
                     </div>
                     <div class="social-post-info-stat-views">
                         <img src="{% static 'home_app/img/eye.png' %}">
-                        <p>890 Переглядів</p>
+                        <p>{{ post.views }} Переглядів</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="social-post">
-            <div class="social-post-user-info">
-                <div class="social-post-inner-user-info" >
-                    <div class="social-post-inner-user-info-total">
-                        <img src="{% static 'home_app/img/Avatar8.png' %}">
-                        <p>Alex_03</p>
+        {% endfor %}
+        {% else %}
+        <script>document.body.style = 'overflow-y: hidden;'</script>
+            <div class="fast-message">
+                <div class="fast-message-content">
+                    <input class="fast-message-content-input" type="text" placeholder="Про що ти зараз думаєш?">
+                    <div class="fast-message-content-buttons">
+                        <button class="fast-message-content-button" type="button"><img src="{% static 'home_app/img/picture.png' %}"></button>
+                        <button class="fast-message-content-button" type="button"><img src="{% static 'home_app/img/emodji.png' %}"></button>
+                        <button class="fast-message-content-button-publish" type="button">
+                            <p>Перейти до оформлення</p>
+                            <img src="{% static 'home_app/img/PlaneR.png' %}">
+                        </button>
                     </div>
                 </div>
-                <button class="social-post-dots">
-                    <img src="{% static 'home_app/img/Dots.png' %}">
-                </button>
             </div>
-            <div class="social-post-info">
-                <div class="social-post-info-text" >
-                    <span>буває такий настрій: просто лежиш і існуєш 😅<br>чай в одній руці, телефон в іншій, думки десь у космосі 🌌 і знаєте шо? норм
-                        <p class="social-post-info-text-tags" >
-                            #вайб
-                        </p>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="social-post">
-            <div class="social-post-user-info">
-                <div class="social-post-inner-user-info" >
-                    <div class="social-post-inner-user-info-total">
-                        <img src="{% static 'home_app/img/Avatar8.png' %}">
-                        <p>Alex_03</p>
-                    </div>
-                </div>
-                <button class="social-post-dots">
-                    <img src="{% static 'home_app/img/Dots.png' %}">
-                </button>
-            </div>
-            <div class="social-post-info">
-                <div class="social-post-info-text" >
-                    <span>буває такий настрій: просто лежиш і існуєш 😅<br>чай в одній руці, телефон в іншій, думки десь у космосі 🌌 і знаєте шо? норм
-                        <p class="social-post-info-text-tags" >
-                            #вайб
-                        </p>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="social-post">
-            <div class="social-post-user-info">
-                <div class="social-post-inner-user-info" >
-                    <div class="social-post-inner-user-info-total">
-                        <img src="{% static 'home_app/img/Avatar8.png' %}">
-                        <p>Alex_03</p>
-                    </div>
-                </div>
-                <button class="social-post-dots">
-                    <img src="{% static 'home_app/img/Dots.png' %}">
-                </button>
-            </div>
-            <div class="social-post-info">
-                <div class="social-post-info-text" >
-                    <span>буває такий настрій: просто лежиш і існуєш 😅<br>чай в одній руці, телефон в іншій, думки десь у космосі 🌌 і знаєте шо? норм
-                        <p class="social-post-info-text-tags" >
-                            #вайб
-                        </p>
-                    </span>
-                </div>
-            </div>
-        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

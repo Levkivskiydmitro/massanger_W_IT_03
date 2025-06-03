@@ -1,6 +1,6 @@
 <html lang="en">
-    {% load static %}
     <head>
+        {% load static %}
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %} {% endblock %}</title>
@@ -10,9 +10,10 @@
     <body>
         
         <div class="header-div" >
-                <header class="space-between" >
+                <header class="{% if request.user.is_authenticated and page != 'login' and page != 'register' %} space-between {% endif %}" >
                     <a href="/"><img class="logo" src="{% static 'img/Logo.png' %}"></a>
-                    
+                    {% if request.user.is_authenticated %}
+                    {% if page != 'login' and page != 'register' %}
                     <div class="links">
                         <nav class="inside-links">
                             {% if page == 'home' %}
@@ -31,7 +32,14 @@
                                 <a class="link" href="{% url 'create' %}"><img class="link-picture" src="{% static 'img/mypub.png' %}"><p>Мої публікації</p></a>
                             {% endif %}
 
-                            <a class="link" href=""><img class="link-picture" src="{% static 'img/people.png' %}"><p>Друзі</p></a>
+                            {% if page == 'friends' %}
+                                <hr color="#E9E5EE">
+                                <a class="link" href="{% url 'friends' %}" style="background-color: #E9E5EE;"><img class="link-picture" src="{% static 'img/people.png' %}"><p>Друзі</p></a>
+                                <hr color="#E9E5EE">
+                            {% else %}
+                                <a class="link" href="{% url 'friends' %}"><img class="link-picture" src="{% static 'img/people.png' %}"><p>Друзі</p></a>
+                            {% endif %}
+
                             <a class="link" href=""><img class="link-picture" src="{% static 'img/chat.png' %}"><p>Чати</p></a>
                             {% if page == 'settings' %}
                                 <hr color="#E9E5EE">
@@ -41,11 +49,14 @@
                                 <a class="link" href="{% url 'settings' %}"><img class="link-picture" src="{% static 'img/Setting.png' %}"><p>Налаштування</p></a>
                             {% endif %}
                         </nav>
-                        <form action="{% url 'logout' %}?next=/" method="post">
-                            {% csrf_token %}
-                            <a href="{% url 'reg' %}" type="submit" class="link-log-out"><img src="{% static 'img/exit.png' %}"><p>Вихід</p></a>
-                        </form>
                     </div>
+                    
+                    <form action="{% url 'logout' %}?next=/" method="post" style="{% if not request.user.is_authenticated %} position: absolute; right: 20px; {% endif %}">
+                        {% csrf_token %}
+                        <a href="{% url 'reg' %}" type="submit" class="link-log-out"><img src="{% static 'img/exit.png' %}"><p>Вихід</p></a>
+                    </form>
+                    {% endif %}
+                    {% endif %}
                 </header>
         </div>
         <main>

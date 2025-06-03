@@ -6,17 +6,14 @@ from .models import Profile
 from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime
 
-
 class SettingsView(TemplateView):
     template_name='settings_app/settings.html'
-
 
 @login_required
 def update_profile(request):
     if request.method == 'POST':
         user = request.user
         profile = user.profile
-
         user.first_name = request.POST.get('first_name')
         user.last_name = request.POST.get('last_name')
         user.email = request.POST.get('email')
@@ -30,8 +27,6 @@ def update_profile(request):
                 profile.birth_date = birth_date
             except ValueError:
                 pass
-
         user.save()
         profile.save()
-
         return redirect('settings')

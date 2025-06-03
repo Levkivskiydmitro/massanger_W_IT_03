@@ -20,24 +20,24 @@ from django.urls import path
 from . import settings
 
 from login.views import authorization, LogOutView
-from reg.views import RegistrationView
+from reg.views import registration
 from home.views import HomeView
 from settings_app.views import SettingsView
 from my_publications.views import CreatePublicationView
 from settings_app.views import update_profile
-
+from friends_app.views import FriendsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view(), name='home'),
-    path('register/', RegistrationView.as_view(), name='reg'),
+    path('register/', registration, name='reg'),
     path('login/', authorization, name='auth'),
     path('log-out/', LogOutView.as_view(), name='logout'),
     path('create/', CreatePublicationView.as_view(), name = 'create'),
     path('settings/', SettingsView.as_view(), name='settings'),
-    path('update-profile/', update_profile, name='update_profile'),
+    path('update-profile/', update_profile, name='profile'),
+    path('friends/', FriendsView.as_view(), name='friends'),
 ]
-
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
